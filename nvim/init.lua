@@ -22,9 +22,10 @@ require("lazy").setup({
 	{ "williamboman/mason.nvim" },
 	-- Search my shit up
 	{ "nvim-telescope/telescope.nvim",   tag = "0.1.8" },
-	{ "nvim-treesitter/nvim-treesitter", branch = 'master', lazy = false, build = ":TSUpdate" },
+	{ "nvim-treesitter/nvim-treesitter", branch = 'master',                                 lazy = false, build = ":TSUpdate" },
 	-- Comment out some shit ez
-	{ "tpope/vim-commentary" },
+	-- { "tpope/vim-commentary" },
+	{ "numToStr/Comment.nvim",           config = function() require('Comment').setup() end },
 	-- Language server
 	{ "neovim/nvim-lspconfig" },
 	{ "nvim-lua/plenary.nvim" },
@@ -95,9 +96,9 @@ vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
 vim.keymap.set('n', 'K', vim.lsp.buf.hover)
 vim.keymap.set('n', 'gv', function()
-			vim.cmd('vsplit')
-			vim.lsp.buf.definition()
-		end)  -- gv = go to definition in vertical split
+	vim.cmd('vsplit')
+	vim.lsp.buf.definition()
+end)   -- gv = go to definition in vertical split
 
 -- Reeeeload it
 vim.keymap.set('n', '<leader>o', ':Lazy sync<CR>')

@@ -163,7 +163,7 @@ vim.opt.foldlevel = 99
 -- Neo-tree keymap
 vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>')
 -- Telescope keymap
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
+vim.keymap.set('n', '<D-O>', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<D-P>', builtin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })

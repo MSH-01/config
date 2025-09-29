@@ -1,4 +1,5 @@
 vim.opt.tabstop = 2
+vim.opt.splitright = true
 vim.opt.shiftwidth = 2
 vim.opt.relativenumber = true
 vim.opt.swapfile = false
@@ -147,10 +148,12 @@ cmp.setup({
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
 vim.keymap.set('n', 'K', vim.lsp.buf.hover)
+-- gv = go to definition in vertical split
 vim.keymap.set('n', 'gv', function()
 	vim.cmd('vsplit')
 	vim.lsp.buf.definition()
-end)   -- gv = go to definition in vertical split
+end
+)
 
 -- Treesitter
 vim.opt.foldmethod = "expr"

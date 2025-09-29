@@ -105,7 +105,7 @@ local cmp = require('cmp')
 
 -- Treesitter
 require('nvim-treesitter.configs').setup({
-	ensure_installed = { "typescript", "tsx", "javascript", "lua" },
+	ensure_installed = { "typescript", "tsx", "javascript", "lua", "python" },
 	sync_install = false,
 	auto_install = true,
 	modules = {},
@@ -187,5 +187,10 @@ vim.lsp.config('ts_ls', {
 	capabilities = capabilities,
 })
 
-vim.lsp.enable({ 'lua_ls', 'ts_ls' })
+vim.lsp.config('basedpyright', {
+	cmd = { 'basedpyright-langserver', '--stdio' },
+	root_markers = { 'pyproject.toml', 'setup.py', 'requirements.txt', '.git' },
+	capabilities = capabilities,
+})
 
+vim.lsp.enable({ 'lua_ls', 'ts_ls', 'basedpyright' })

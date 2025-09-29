@@ -94,6 +94,10 @@ local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
 vim.keymap.set('n', 'K', vim.lsp.buf.hover)
+vim.keymap.set('n', 'gv', function()
+			vim.cmd('vsplit')
+			vim.lsp.buf.definition()
+		end)  -- gv = go to definition in vertical split
 
 -- Reeeeload it
 vim.keymap.set('n', '<leader>o', ':Lazy sync<CR>')

@@ -21,7 +21,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   { "williamboman/mason.nvim" },
 	-- Search my shit up
-	{ "nvim-telescope/telescope.nvim", tag = "0.1.8" },	
+	{ "nvim-telescope/telescope.nvim", tag = "0.1.8" },
 	-- Comment out some shit ez
 	{ "tpope/vim-commentary" },
   -- Language server
@@ -29,15 +29,16 @@ require("lazy").setup({
   { "nvim-lua/plenary.nvim" },
   { "MunifTanjim/nui.nvim" },
   { "nvim-tree/nvim-web-devicons" },
+	-- Get rid of any tree for now..
   -- { "nvim-neo-tree/neo-tree.nvim" },
-	  {
+	{
     "i3d/vim-jimbothemes",
     lazy = false,
     priority = 1000,
     config = function()
       vim.opt.background = "dark"
       vim.opt.termguicolors = true
-      vim.cmd.colorscheme("batman") -- replace with actual theme name
+      vim.cmd.colorscheme("batman")
     end,
   },
 })
@@ -91,7 +92,7 @@ local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
 vim.keymap.set('n', '<leader>o', ':Lazy sync<CR>')
 -- Neo-tree keymap
-vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>')
+-- vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>')
 -- Telescope keymap
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })

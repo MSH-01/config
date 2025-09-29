@@ -100,6 +100,21 @@ require "mason".setup()
 local builtin = require('telescope.builtin')
 local cmp = require('cmp')
 
+-- Treesitter
+require('nvim-treesitter.configs').setup({
+	ensure_installed = { "typescript", "tsx", "javascript", "lua" },
+	sync_install = false,
+	auto_install = true,
+	modules = {},
+	ignore_install = {},
+	highlight = {
+		enable = true,
+	},
+	indent = {
+		enable = true,
+	},
+})
+
 -- CMP
 cmp.setup({
 	snippet = {
@@ -134,6 +149,12 @@ vim.keymap.set('n', 'gv', function()
 	vim.cmd('vsplit')
 	vim.lsp.buf.definition()
 end)   -- gv = go to definition in vertical split
+
+-- Treesitter
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldenable = false
+vim.opt.foldlevel = 99
 
 -- Reeeeload it (doesnt actually do shit with lazy)
 -- vim.keymap.set('n', '<leader>o', ':Lazy sync<CR>')

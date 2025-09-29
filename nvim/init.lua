@@ -30,6 +30,8 @@ require("lazy").setup({
 	-- Search my shit up
 	{ "nvim-telescope/telescope.nvim",   tag = "0.1.8" },
 	{ "nvim-treesitter/nvim-treesitter", branch = 'master',                                 lazy = false, build = ":TSUpdate" },
+	-- BLAME
+	{ "lewis6991/gitsigns.nvim", config = function() require('gitsigns').setup({current_line_blame = true, }) end },
 	-- Comment out some shit ez
 	-- { "tpope/vim-commentary" },
 	{ "numToStr/Comment.nvim",           config = function() require('Comment').setup() end },

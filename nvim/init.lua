@@ -20,6 +20,13 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	{ "williamboman/mason.nvim" },
+	-- Completion
+	{ "hrsh7th/nvim-cmp" },
+	{ "hrsh7th/cmp-nvim-lsp" },
+	{ "hrsh7th/cmp-buffer" },
+	{ "hrsh7th/cmp-path" },
+	{ "L3MON4D3/LuaSnip" },
+	{ "saadparwaiz1/cmp_luasnip" },
 	-- Search my shit up
 	{ "nvim-telescope/telescope.nvim",   tag = "0.1.8" },
 	{ "nvim-treesitter/nvim-treesitter", branch = 'master',                                 lazy = false, build = ":TSUpdate" },
@@ -89,6 +96,32 @@ require "mason".setup()
 -- })
 
 local builtin = require('telescope.builtin')
+local cmp = require('cmp')
+
+-- CMP
+cmp.setup({
+	snippet = {
+		expand = function(args)
+			require('luasnip').lsp_expand(args.body)
+		end,
+	},
+	mapping = cmp.mapping.preset.insert({
+				['<C-b>'] = cmp.mapping.scroll_docs(-4),
+		['<C-f>'] = cmp.mapping.scroll_docs(4),
+		['<C-Space>'] = cmp.mapping.complete(),
+		['<C-e>'] = cmp.mapping.abort(),
+		['<CR>'] = cmp.mapping.confirm({ select = true }),
+		['<Tab>'] = cmp.mapping.select_next_item(),
+		['<S-Tab>'] = cmp.mapping.select_prev_item(),
+	}),
+	sources = cmp.config.sources({
+		{ name = 'nvim_lsp' },
+		{ name = 'luasnip' },
+	}, {
+		{ name = 'buffer' },
+		{ name = 'path' },
+	})
+})
 
 -- Keymaps
 -- LSP
@@ -110,5 +143,13 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' 
 vim.keymap.set('n', '<D-P>', builtin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local lspconfig = require('lspconfig')
 
-vim.lsp.enable({ "lua_ls", "ts_ls" })
+lspconfig.lua_ls.setup({
+	capabilities = capabilities
+})
+
+lspconfig.ts_ls.setup({
+	capabilities = capabilities
+})

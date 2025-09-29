@@ -22,6 +22,8 @@ require("lazy").setup({
   { "williamboman/mason.nvim" },
 	-- Search my shit up
 	{ "nvim-telescope/telescope.nvim", tag = "0.1.8" },
+	{ "nvim-treesitter/nvim-treesitter", branch = 'master', lazy = false, build = ":TSUpdate"},
+	{ "
 	-- Comment out some shit ez
 	{ "tpope/vim-commentary" },
   -- Language server
@@ -94,7 +96,12 @@ vim.keymap.set('n', '<leader>o', ':Lazy sync<CR>')
 -- Neo-tree keymap
 -- vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>')
 -- Telescope keymap
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', '<leader>ff', function()
+	builtin.find_files({
+		hidden = false,
+		no_ignore = false
+	})
+end, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })

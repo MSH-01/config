@@ -39,7 +39,8 @@ require("lazy").setup({
 	{ "MunifTanjim/nui.nvim" },
 	{ "nvim-tree/nvim-web-devicons" },
 	-- Get rid of neotree for now..
-	-- { "nvim-neo-tree/neo-tree.nvim" },
+	-- or not.. we can keep it, just by default have it closed
+	{ "nvim-neo-tree/neo-tree.nvim" },
 	{
 		"i3d/vim-jimbothemes",
 		lazy = false,
@@ -55,45 +56,46 @@ require("lazy").setup({
 require "mason".setup()
 
 -- -- Neo-tree setup
--- require("neo-tree").setup({
--- 	close_if_last_window = false,
--- 	enable_git_status = true,
--- 	enable_diagnostics = true,
--- 	window = {
--- 		position = "left",
--- 		width = 30,
--- 		mappings = {
--- 			["<space>"] = "toggle_node",
--- 			["<cr>"] = "open",
--- 			["S"] = "open_split",
--- 			["s"] = "open_vsplit",
--- 			["t"] = "open_tabnew",
--- 			["C"] = "close_node",
--- 			["z"] = "close_all_nodes",
--- 			["a"] = "add",
--- 			["A"] = "add_directory",
--- 			["d"] = "delete",
--- 			["r"] = "rename",
--- 			["y"] = "copy_to_clipboard",
--- 			["x"] = "cut_to_clipboard",
--- 			["p"] = "paste_from_clipboard",
--- 			["q"] = "close_window",
--- 			["R"] = "refresh",
--- 			["?"] = "show_help",
--- 		},
--- 	},
--- 	filesystem = {
--- 		filtered_items = {
--- 			visible = false,
--- 			hide_dotfiles = true,
--- 			hide_gitignored = true,
--- 		},
--- 		follow_current_file = {
--- 			enabled = true,
--- 		},
--- 		use_libuv_file_watcher = true,
--- 	},
--- })
+ require("neo-tree").setup({
+ 	close_if_last_window = true,
+ 	enable_git_status = true,
+ 	enable_diagnostics = true,
+ 	window = {
+ 		position = "left",
+ 		width = 20,
+ 		mappings = {
+ 			["<space>"] = "toggle_node",
+ 			["<cr>"] = "open",
+ 			["S"] = "open_split",
+ 			["s"] = "open_vsplit",
+ 			["t"] = "open_tabnew",
+ 			["C"] = "close_node",
+ 			["z"] = "close_all_nodes",
+ 			["a"] = "add",
+ 			["A"] = "add_directory",
+ 			["d"] = "delete",
+ 			["r"] = "rename",
+ 			["y"] = "copy_to_clipboard",
+ 			["x"] = "cut_to_clipboard",
+ 			["p"] = "paste_from_clipboard",
+ 			["q"] = "close_window",
+ 			["R"] = "refresh",
+ 			["?"] = "show_help",
+ 		},
+ 	},
+ 	filesystem = {
+		hijack_netrw_behavior = "disabled",
+ 		filtered_items = {
+ 			visible = false,
+ 			hide_dotfiles = true,
+ 			hide_gitignored = true,
+ 		},
+ 		follow_current_file = {
+ 			enabled = true,
+ 		},
+ 		use_libuv_file_watcher = true,
+ 	},
+ })
 
 local builtin = require('telescope.builtin')
 local cmp = require('cmp')
@@ -136,7 +138,7 @@ end)   -- gv = go to definition in vertical split
 -- Reeeeload it (doesnt actually do shit with lazy)
 -- vim.keymap.set('n', '<leader>o', ':Lazy sync<CR>')
 -- Neo-tree keymap
--- vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>')
+vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>')
 -- Telescope keymap
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })

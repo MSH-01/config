@@ -193,4 +193,34 @@ vim.lsp.config('basedpyright', {
 	capabilities = capabilities,
 })
 
-vim.lsp.enable({ 'lua_ls', 'ts_ls', 'basedpyright' })
+vim.lsp.config('tailwindcss', {
+	cmd = { 'tailwindcss-language-server', '--stdio' },
+	root_markers = {
+		'tailwind.config.js',
+		'tailwind.config.cjs',
+		'tailwind.config.mjs',
+		'tailwind.config.ts',
+		'postcss.config.js',
+		'postcss.config.cjs',
+		'postcss.config.mjs',
+		'postcss.config.ts',
+		'package.json',
+		'.git'
+	},
+	capabilities = capabilities,
+})
+
+vim.lsp.config('cssls', {
+	cmd = { 'vscode-css-language-server', '--stdio' },
+	root_markers = { 'package.json', '.git' },
+	capabilities = capabilities,
+})
+
+vim.lsp.config('html', {
+	cmd = { 'vscode-html-language-server', '--stdio' },
+	root_markers = { 'package.json', '.git' },
+	capabilities = capabilities,
+})
+
+vim.lsp.enable({ 'lua_ls', 'ts_ls', 'basedpyright', 'tailwindcss', 'cssls', 'html' })
+

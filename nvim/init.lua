@@ -133,8 +133,8 @@ vim.keymap.set('n', 'gv', function()
 	vim.lsp.buf.definition()
 end)   -- gv = go to definition in vertical split
 
--- Reeeeload it
-vim.keymap.set('n', '<leader>o', ':Lazy sync<CR>')
+-- Reeeeload it (doesnt actually do shit with lazy)
+-- vim.keymap.set('n', '<leader>o', ':Lazy sync<CR>')
 -- Neo-tree keymap
 -- vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>')
 -- Telescope keymap
@@ -144,12 +144,18 @@ vim.keymap.set('n', '<D-P>', builtin.find_files, { desc = 'Telescope find files'
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-local lspconfig = require('lspconfig')
 
-lspconfig.lua_ls.setup({
-	capabilities = capabilities
+vim.lsp.config('lua_ls', {
+	cmd = { 'lua-language-server' },
+	root_markers = { '.luarc.json', '.luarc.jsonc', '.luacheckrc', '.stylua.toml', 'stylua.toml', 'selene.toml', 'selene.yml', '.git' },
+	capabilities = capabilities,
 })
 
-lspconfig.ts_ls.setup({
-	capabilities = capabilities
+vim.lsp.config('ts_ls', {
+	cmd = { 'typescript-language-server', '--stdio' },
+	root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
+	capabilities = capabilities,
 })
+
+vim.lsp.enable({ 'lua_ls', 'ts_ls' })
+

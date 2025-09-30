@@ -90,7 +90,7 @@ require "mason".setup()
 		hijack_netrw_behavior = "disabled",
  		filtered_items = {
  			visible = false,
- 			hide_dotfiles = true,
+ 			hide_dotfiles = false,
  			hide_gitignored = true,
  		},
  		follow_current_file = {

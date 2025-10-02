@@ -7,7 +7,16 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "icon_theme": "VSCode Great Icons Theme",
+  "context_servers": {
+    "mcp-server-context7": {
+      "source": "extension",
+      "enabled": true,
+      "settings": {
+        "context7_api_key": ""
+      }
+    }
+  },
+  "icon_theme": "VSCode Icons (Light)",
   "agent": {
     "single_file_review": true,
     "default_profile": "ask",

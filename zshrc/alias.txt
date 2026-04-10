@@ -1,0 +1,6 @@
+alias msh='cd "/Users/msh/Library/Mobile Documents/iCloud~md~obsidian/Documents/msh"'
+alias box='ssh ubuntu@18.157.110.150 -i ~/key.pem'
+alias cc='claude --dangerously-skip-permissions'
+alias querio="~/Developer/Querio/webapp/scripts/tmux-querio.sh"
+
+

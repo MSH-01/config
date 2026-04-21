@@ -42,8 +42,8 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 
-theme = batman
+theme = eyecandy-light
 font-family = "CommitMono"
 keybind = cmd+shift+p=unbind
 keybind = shift+enter=text:\x1b\r
-
+macos-option-as-alt = true

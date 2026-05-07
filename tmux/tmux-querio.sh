@@ -15,7 +15,7 @@ tmux send-keys -t $SESSION:dev.0 "lazygit" Enter
 tmux split-window -h -t $SESSION:dev -c $DIR
 
 # Top right: main app
-tmux send-keys -t $SESSION:dev.1 "mise dev:app" Enter
+tmux send-keys -t $SESSION:dev.1 "mise dev:app"
 
 # Split bottom right
 tmux split-window -v -t $SESSION:dev.1 -c $DIR
@@ -23,8 +23,8 @@ tmux split-window -v -t $SESSION:dev.1 -c $DIR
 # Split bottom into two (backend | worker)
 tmux split-window -h -t $SESSION:dev.2 -c $DIR
 
-tmux send-keys -t $SESSION:dev.2 "mise dev:cee" Enter
-tmux send-keys -t $SESSION:dev.3 "mise dev:steve" Enter
+tmux send-keys -t $SESSION:dev.2 "mise dev:cee"
+tmux send-keys -t $SESSION:dev.3 "mise dev:steve"
 
 # Equalize the two bottom-right panes
 tmux resize-pane -t $SESSION:dev.3 -x 50%

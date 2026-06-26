@@ -20,11 +20,11 @@ tmux send-keys -t $SESSION:dev.1 "mise dev:app"
 # Split bottom right
 tmux split-window -v -t $SESSION:dev.1 -c $DIR
 
-# Split bottom into two (backend | worker)
+# Split bottom into two (backend | gateway)
 tmux split-window -h -t $SESSION:dev.2 -c $DIR
 
 tmux send-keys -t $SESSION:dev.2 "mise dev:cee"
-tmux send-keys -t $SESSION:dev.3 "mise dev:steve"
+tmux send-keys -t $SESSION:dev.3 "mise dev:gateway"
 
 # Equalize the two bottom-right panes
 tmux resize-pane -t $SESSION:dev.3 -x 50%

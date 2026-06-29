@@ -7,9 +7,55 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "diff_view_style": "unified",
+  "calls": {
+    "mute_on_join": true
+  },
+  "preview_tabs": {
+    "enable_preview_from_file_finder": true
+  },
+  "status_bar": {
+    "show_active_file": true
+  },
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry"
+    }
+  },
+  "outline_panel": {
+    "dock": "right"
+  },
+  "collaboration_panel": {
+    "button": false,
+    "dock": "right"
+  },
+  "git_panel": {
+    "button": true,
+    "dock": "right"
+  },
+  "lsp": {
+    "vtsls": {
+      "settings": {
+        "typescript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always"
+          }
+        },
+        "javascript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always"
+          }
+        }
+      },
+      "enable_lsp_tasks": true
+    }
+  },
+  "terminal": {
+    "show_count_badge": false,
+    "dock": "bottom"
+  },
   "context_servers": {
     "mcp-server-context7": {
-      "source": "extension",
       "enabled": true,
       "settings": {
         "context7_api_key": ""
@@ -18,34 +64,76 @@
   },
   "icon_theme": "VSCode Icons (Light)",
   "agent": {
-    "single_file_review": true,
-    "default_profile": "ask",
+    "button": false,
+    "sidebar_side": "right",
+    "tool_permissions": {
+      "default": "allow"
+    },
+    "profiles": {
+      "msh": {
+        "default_model": {
+          "provider": "anthropic",
+          "model": "claude-opus-4-7-latest",
+          "enable_thinking": true,
+          "effort": "high"
+        },
+        "name": "msh",
+        "tools": {},
+        "enable_all_context_servers": false,
+        "context_servers": {}
+      }
+    },
+    "dock": "left",
+    "inline_assistant_model": {
+      "provider": "anthropic",
+      "model": "claude-opus-4-6-latest"
+    },
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-sonnet-4-5"
-    }
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-5-latest"
+    },
+    "model_parameters": []
   },
   "minimap": {
     "show": "never"
   },
+  "edit_predictions": {
+    "provider": "copilot",
+    "mode": "subtle"
+  },
+  "format_on_save": "off",
   "toolbar": {
     "breadcrumbs": false,
     "quick_actions": false
   },
+  "tab_bar": {
+    "show": true,
+    "show_nav_history_buttons": false
+  },
+  "tabs": {
+    "file_icons": true,
+    "git_status": true
+  },
   "title_bar": {
-    "show_branch_name": false,
-    "show_branch_icon": false,
+    "show_user_menu": true,
+    "show_branch_status_icon": false,
+    "show_branch_name": true,
     "show_menus": false,
     "show_onboarding_banner": false,
     "show_project_items": false,
     "show_sign_in": false,
     "show_user_picture": true
   },
-  "relative_line_numbers": true,
+  "relative_line_numbers": "enabled",
   "project_panel": {
+    "hide_root": false,
+    "diagnostic_badges": false,
+    "git_status_indicator": false,
+    "dock": "left",
     "scrollbar": {
       "show": "never"
-    }
+    },
+    "indent_size": 16
   },
   "buffer_font_family": "CommitMono",
   "ui_font_family": ".SystemUIFont",
@@ -54,8 +142,8 @@
   "ui_font_size": 14,
   "buffer_font_size": 12,
   "theme": {
-    "mode": "system",
-    "light": "One Light",
-    "dark": "Eyecandy"
+    "mode": "light",
+    "light": "Eyecandy Light",
+    "dark": "Eyecandy Dark"
   }
 }

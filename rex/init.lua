@@ -41,3 +41,6 @@ rex.action{
     return { session_id = created.session_id }
   end,
 }
+
+-- Toggle light / dark appearance
+rex.bind("cmd+shift+l", "client.appearance.switch_mode", { mode = "toggle" })

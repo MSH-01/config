@@ -44,17 +44,16 @@ require("lazy").setup({
 	-- Get rid of neotree for now..
 	-- or not.. we can keep it, just by default have it closed
 	{ "nvim-neo-tree/neo-tree.nvim" },
-	{
-		"i3d/vim-jimbothemes",
-		lazy = false,
-		priority = 1000,
-		config = function()
-			vim.opt.background = "dark"
-			vim.opt.termguicolors = true
-			vim.cmd.colorscheme("batman")
-		end,
-	},
 })
+
+-- Eyecandy lives in colors/eyecandy.lua
+-- 'background' is left unset so Nvim follows the terminal's light/dark appearance
+vim.opt.termguicolors = true
+vim.cmd.colorscheme("eyecandy")
+-- Toggle light/dark (eyecandy reloads itself when 'background' changes)
+vim.keymap.set('n', '<leader>tt', function()
+	vim.o.background = vim.o.background == "dark" and "light" or "dark"
+end, { desc = 'Toggle light/dark theme' })
 
 require "mason".setup()
 

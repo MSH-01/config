@@ -1,0 +1,17 @@
+{
+  "expect": {
+    "106": "const tags = [\"draft\", \"published\"];",
+    "124": "function welcome(user) {",
+    "127": "  return \"Hi, \" + user;",
+    "139": "const label = formatDistance(trip.km);",
+    "148": "const a = 1;",
+    "149": "const b = 2;",
+    "150": "const c = 3;",
+    "151": "const d = 4;",
+    "162": "  start();",
+    "163": "  log(\"started\");",
+    "172": "// const api = createClient();",
+    "173": "const legacy = createLegacyClient();",
+    "184": "bar + bar + bar"
+  }
+}

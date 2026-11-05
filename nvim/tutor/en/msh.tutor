@@ -1,0 +1,255 @@
+# Back to Neovim (from Helix)
+
+Your setup, your keymaps. Leader is `<Space>`.
+Scroll with `j`{normal}. Lines marked ✗ turn ✓ when you fix them.
+Messed up? `<Esc>`{normal} then `u`{normal} undoes. Nothing here is saved.
+
+# The one rule
+
+Helix is selection first: select, then act (`wd`).
+Vim is verb first: act, then say on what (`dw`).
+
+    d  delete      c  change (delete + insert)      y  yank
+    w  word        $  end of line      iw  inner word      i(  inside ( )
+
+So `dw` = delete word, `ci(` = change inside parens, `yy` = yank line.
+Doubling the verb means "this line": `dd`, `cc`, `yy`.
+
+# Helix habits that will bite
+
+    Helix          Neovim          careful
+    x              V               x in Vim DELETES a character
+    xd             dd
+    wd             dw / daw
+    mi( c          ci(
+    %              ggVG            % in Vim = matching bracket
+    mm             %
+    gh / gl        0 / $           ^ = first non-blank
+    ge             G               ge in Vim = end of previous word
+    U              <C-r>           redo
+    ;              <Esc>           ; in Vim repeats f/t
+    Space f        ⌘⇧P             find files   (your map)
+    Space /        ⌘⇧O             live grep    (your map)
+    Space b        Space fb        buffers      (your map)
+    Space e        Space e         neo-tree     (same!)
+    Space k        K               hover        (your map)
+    Space r        grn             rename       (built in, 0.11+)
+    Space a        gra             code action  (built in, 0.11+)
+    gr             grr             references   (built in, 0.11+)
+    Ctrl-c         gcc             comment      (Comment.nvim)
+
+# 1.1 MOVING: h j k l and counts
+
+You have `relativenumber` on: the gutter shows how far each line is.
+Instead of `jjjjj`, read the number and type `5j`{normal}.
+
+ 1. Look at the gutter, then jump straight to the line saying TARGET with a count.
+
+    not this one
+    not this one
+    not this one
+    not this one
+    TARGET: you got here with one count + j, right?
+
+# 1.2 MOVING: words
+
+`w` next word start, `e` word end, `b` back. `W E B` = space-separated WORDS.
+
+ 1. Put the cursor on `const` below. Reach `addSuffix` in as few keys as you can.
+    (Hint: count the words. `10w`{normal}. Or `7W`{normal}.)
+
+    const message = formatDistance(start, end, { addSuffix: true });
+
+# 1.3 MOVING: within a line
+
+`0` col 0, `^` first non-blank, `$` end. `f{c}` onto char, `t{c}` just before it.
+`;` repeats the last f/t, `,` goes back.
+
+ 1. On the line below try: `^`{normal}  `f!`{normal}  `$`{normal}  `0`{normal}  `fu`{normal} `;`{normal} `;`{normal} `,`{normal}
+
+        if (user.role === "admin" && !user.disabled) return true;
+
+# 1.4 MOVING: big jumps
+
+    gg / G        first / last line
+    42G or :42    line 42
+    %             matching bracket
+    <C-d> <C-u>   half page down / up
+    <C-o> <C-i>   jump back / forward (works after gg, G, /, gd, ...)
+    zz            center the screen on the cursor
+
+ 1. Press `G`{normal}, then `<C-o>`{normal} to come back here.
+ 2. Put the cursor on the `{` below and press `%`{normal} a few times.
+
+    if (!res.ok) { throw new Error(`failed: ${res.status}`); }
+
+# 1.5 MOVING: search
+
+`/text<Enter>` forward, `?text<Enter>` back, `n`/`N` next/prev, `*` word under cursor.
+Clear the highlight with `:noh`{vim} or `<C-l>`{normal}.
+
+ 1. Type `/retries`{normal} `<Enter>`{normal}, then `n`{normal} `n`{normal} `N`{normal}.
+ 2. Put the cursor on `attempt` and press `*`{normal}.
+
+    const retries = 3;
+    while (attempt < retries) { attempt++; }
+    if (attempt === retries) log("last attempt");
+
+# 2.1 EDITING: delete
+
+    x     delete char          dw   delete to next word
+    D     delete to line end   dd   delete line      3dd  three lines
+    dt]   delete till ]        di"  delete inside quotes
+
+ 1. Make the ✗ line match the line under it. Cursor on the `,` before "archived", then `dt]`{normal}.
+
+const tags = ["draft", "published", "archived"];
+const tags = ["draft", "published"];
+
+ 2. Delete these three junk lines with one command: cursor on the first, `3dd`{normal}.
+
+console.log("junk 1");
+console.log("junk 2");
+console.log("junk 3");
+keep me
+
+# 2.2 EDITING: change
+
+`c` = delete + insert mode. `ciw` inner word, `ci(` inside parens, `ci"` inside quotes,
+`cw` to end of word, `C` to end of line. Finish each with `<Esc>`.
+These work from ANYWHERE inside the word / parens / quotes.
+
+ 1. Make each ✗ line match the line under it.
+
+function greet(name, greeting) {
+function welcome(user) {
+
+  return "Hello, " + name;
+  return "Hi, " + user;
+
+# 2.3 EDITING: yank and put
+
+`yy` yank line, `p` put below, `P` put above, `yiw` yank word.
+Note: in Neovim `Y` yanks to end of line (not the whole line like old Vim).
+
+ 1. Try `yy`{normal}`p`{normal} on any line, then `u`{normal}.
+ 2. Fix the ✗ line: cursor on `formatDistance`, `yiw`{normal}, then `j`{normal} `f(`{normal} `P`{normal}.
+
+formatDistance
+const label = (trip.km);
+
+# 2.4 EDITING: the dot
+
+`.` repeats your last change. Do it once, move, press `.` again.
+`u` undo, `<C-r>` redo.
+
+ 1. On the first `let`: `cwconst<Esc>`{normal}. Then `j.`{normal} `j.`{normal} `j.`{normal}
+
+let a = 1;
+let b = 2;
+let c = 3;
+let d = 4;
+
+# 2.5 EDITING: visual mode
+
+`v` charwise, `V` linewise, `<C-v>` block. Then a verb: `d y c > < gc`.
+`o` jumps to the other end of the selection. `gv` would normally reselect,
+but YOUR config remaps `gv` to "definition in vsplit".
+
+ 1. Indent the two middle lines: cursor on `start();`, then `Vj>`{normal}.
+
+if (ready) {
+start();
+log("started");
+}
+
+# 2.6 EDITING: comments (Comment.nvim)
+
+`gcc` toggle line, `gc2j` this + 2 lines, `gc` in visual, `gbc` block comment.
+
+ 1. Comment the first line, uncomment the second (`gcc`{normal}, `j`{normal}, `gcc`{normal}).
+
+const api = createClient();
+// const legacy = createLegacyClient();
+
+# 2.7 EDITING: substitute
+
+Helix multi-select + replace becomes a command:
+
+    :s/old/new/g     this line         :%s/old/new/g    whole file
+    *  then  cgn new<Esc>  then  . . .  (replace next match, repeat)
+
+ 1. Turn every `foo` on the line into `bar`: `:s/foo/bar/g`{vim} `<Enter>`{normal}
+
+foo + foo + foo
+bar + bar + bar
+
+# 3.1 YOUR SETUP: files and search
+
+These leave the tutorial. Come back with `:Tutor msh`{vim}, or `<C-o>`{normal} / `:b#`{vim}.
+
+    <Space>e       toggle Neo-tree (focus jumps into it)
+                   in the tree: Enter open, Space fold, a add, d delete, r rename,
+                   s vsplit, q close, ? all keys.  NOTE: `l` does NOT open folders.
+    <C-w>h / l     focus tree / code
+    ⌘⇧P            find files      (Telescope)
+    ⌘⇧O            live grep       (Telescope)
+    <Space>fb      open buffers    <Space>fh   help tags
+    in a picker:   type to filter, <C-n>/<C-p> move, Enter open,
+                   <C-v> vsplit, <C-x> split, <C-q> results to quickfix,
+                   Esc once = picker normal mode (j/k), Esc twice = close
+
+ 1. `:cd ~/.config/nvim`{vim}, then `<Space>e`{normal}, open init.lua from the tree.
+ 2. `⌘⇧O`{normal}, type `mapleader`, Enter.
+ 3. `<Space>fb`{normal} and jump back to this tutor buffer.
+
+If ⌘⇧P / ⌘⇧O do nothing, your terminal is eating ⌘. Use `:Telescope find_files`{vim}
+and `:Telescope live_grep`{vim}, or add leader maps (see the end).
+
+# 3.2 YOUR SETUP: LSP
+
+    gd            go to definition         <C-o>   come back
+    gv            definition in a vsplit (opens on the right: splitright)
+    K             hover docs
+    <Space>lf     format buffer
+    grn           rename          gra  code action
+    grr           references      gri  implementation
+    gO            document symbols
+    ]d / [d       next / prev diagnostic
+    <C-w>d        show the diagnostic message (0.11+ doesn't print it inline)
+    <C-s>         signature help (insert mode)
+
+ 1. In init.lua (lua_ls), put the cursor on `builtin` in a keymap line, `gd`{normal}, `<C-o>`{normal}.
+ 2. `K`{normal} on `vim.keymap.set`.
+
+Completion (insert mode): `<Tab>`/`<S-Tab>` move, `<Enter>` accept,
+`<C-Space>` open, `<C-e>` close, `<C-b>`/`<C-f>` scroll docs.
+
+# 3.3 YOUR SETUP: the rest
+
+    <Space>tt     toggle eyecandy light / dark
+    gitsigns      blame shows on the cursor line automatically
+                  `:Gitsigns preview_hunk`{vim}  `:Gitsigns reset_hunk`{vim}  (no keymaps yet)
+    folds         OFF by default: press `zi`{normal} to enable, then `za zc zo zR zM`
+    windows       <C-w>v vsplit, <C-w>s split, <C-w>hjkl move, <C-w>q close, <C-w>= equalize
+    buffers       ]b / [b next / prev buffer (0.11+)
+    :Lazy         plugins       :Mason   LSP servers       :checkhealth
+
+# Optional: Helix-style leader maps
+
+If you want your Helix fingers to keep working, add these to init.lua:
+
+~~~ lua
+vim.keymap.set('n', '<leader>f', builtin.find_files)
+vim.keymap.set('n', '<leader>/', builtin.live_grep)
+vim.keymap.set('n', '<leader>b', builtin.buffers)
+vim.keymap.set('n', '<leader>k', vim.lsp.buf.hover)
+vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename)
+vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action)
+vim.keymap.set('n', '<leader>d', builtin.diagnostics)
+~~~
+
+(`<leader>f` would shadow `<leader>fb`/`<leader>fh` with a delay, so maybe
+move those to `<leader>b` and `<leader>?`.)
+
+Done. Run `:Tutor`{vim} for the full built-in course whenever.

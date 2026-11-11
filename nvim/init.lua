@@ -169,6 +169,15 @@ vim.keymap.set('n', '<D-O>', builtin.live_grep, { desc = 'Telescope live grep' }
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<D-P>', builtin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+vim.keymap.set('n', '<leader><leader>', builtin.find_files, { desc = 'Find files' })
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Grep project' })
+vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = 'Recent files' })
+vim.keymap.set('n', '<leader>fp', builtin.commands, { desc = 'Command palette' })
+vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Search keymaps' })
+vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, { desc = 'Symbols in file' })
+vim.keymap.set('n', '<leader>fS', builtin.lsp_dynamic_workspace_symbols, { desc = 'Symbols in project' })
+vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, { desc = 'Search in file' })
+vim.keymap.set('n', '<leader>.', builtin.resume, { desc = 'Reopen last picker' })
 -- Fold up
 -- vim.keymap.set('n', 'ff', 'za')
 
